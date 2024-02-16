@@ -37,6 +37,20 @@ app.post('/api/products', async(req, res) => {
     }
 });
 
+app.put('/api/products/:id', async(req, res) => {
+    try {
+        const { id } = req.params;
+        const products = await Product.findByIdAndUpdate(id, req.body);
+        if (!products) {
+            return res.status(404).json({message: "Product not found"});
+        }
+        const updatedProduct = await Product.findById(id);
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
+
 mongoose.connect("mongodb+srv://DiegoSarmiento:4TESTMLTg07019zg@cluster.ymcpawt.mongodb.net/DressStore?retryWrites=true&w=majority")
 .then(() => {
     console.log("Connected to Dress Store database");
