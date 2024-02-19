@@ -1,4 +1,13 @@
+/* 
+  File: product.controller.js
+  Student's Name: Diego Sarmiento
+  Student ID: 301379640
+  Date: 02/19/2024
+*/
+
 const Product = require('../models/product.model.js');
+
+// Get all products (api/products)
 
 const getAllProducts = async(req, res) => {
     try {
@@ -8,6 +17,8 @@ const getAllProducts = async(req, res) => {
         res.status(500).json({message: error.message});
     }
 };
+
+// Get product by id (api/products/:id)
 
 const getProduct = async(req, res) => {
     try {
@@ -19,6 +30,8 @@ const getProduct = async(req, res) => {
     }
 };
 
+// Add new product (api/products)
+
 const createProduct = async(req, res) => {
     try {
         const products = await Product.create(req.body);
@@ -27,6 +40,8 @@ const createProduct = async(req, res) => {
         res.status(500).json({message: error.message});
     }
 };
+
+// Update product by id (api/products/:id)
 
 const updateProduct = async(req, res) => {
     try {
@@ -42,6 +57,8 @@ const updateProduct = async(req, res) => {
     }
 };
 
+// Remove product by id (api/products/:id)
+
 const deleteProduct = async(req, res) => {
     try {
         const { id } = req.params;
@@ -55,6 +72,8 @@ const deleteProduct = async(req, res) => {
     }
 };
 
+// Remove all products (api/products)
+
 const deleteAllProducts = async(req, res) => {
     try {
         const products = await Product.deleteMany({});
@@ -63,6 +82,8 @@ const deleteAllProducts = async(req, res) => {
         res.status(500).json({message: error.message});
     }
 };
+
+// Find all products which name contains 'Kw' (api/products?name=[Kw])
 
 const productContainsKw = async(req, res) => {
     const { name } = req.query;

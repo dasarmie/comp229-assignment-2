@@ -1,3 +1,10 @@
+/* 
+  File: Index.js
+  Student's Name: Diego Sarmiento
+  Student ID: 301379640
+  Date: 02/19/2024
+*/
+
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/product.model.js');
