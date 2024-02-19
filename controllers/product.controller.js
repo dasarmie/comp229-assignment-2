@@ -57,8 +57,18 @@ const deleteProduct = async(req, res) => {
 
 const deleteAllProducts = async(req, res) => {
     try {
-        const products = await Product.findByIdAndDelete();
+        const products = await Product.deleteMany({});
         res.status(200).json({message: "All products deleted successfully"});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+const productContainsKw = async(req, res) => {
+    const { name } = req.query;
+    try {
+        const products = await Product.find({ name: { $regex: new RegExp(name, 'i') }});
+        res.status(200).json(products);
     } catch (error) {
         res.status(500).json({message: error.message});
     }
@@ -70,5 +80,6 @@ module.exports = {
     createProduct,
     updateProduct,
     deleteProduct,
-    deleteAllProducts
+    deleteAllProducts,
+    productContainsKw
 };
